@@ -192,7 +192,7 @@ Logs messages for AnswerOptions, Interactions, and CheckboxQuestions if they are
 
 The action still starts the same: with a Generate Random Hex-step and Create Submission Step.
 The following image displays the rest of the action in the old situation, using only standard action steps:
-![Old Action setup](https://gyazo.com/0506eec549f8ef9f3efce24f1b697d48)
+![Old Action setup](https://i.gyazo.com/b06d4979843ff6eeb418a06150773339.png)
 
 This has now been reduced to only a few, custom coded steps:
 ![New Action setup](https://i.gyazo.com/a8655e7da61807d7b8c3fd71dfdc8338.png)
