@@ -112,4 +112,3 @@ const sleep = (ms) => {
     currentDate = Date.now();
   } while (currentDate - date < ms);
 };
-// Credits to Bob Hansen
