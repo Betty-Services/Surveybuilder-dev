@@ -20,7 +20,7 @@
       }
     },
     {
-      "name": "answeroptions",
+      "name": "answerOptions",
       "label": "Answer Options",
       "info": "The Answer Options created in the previous step",
       "meta": {
@@ -47,6 +47,17 @@
       "info": "The log of the creation of the submission in the application logs",
       "meta": {
         "type": "Boolean"
+      }
+    },
+    {
+      "name": "result",
+      "label": "Result",
+      "info": "",
+      "meta": {
+        "type": "Output",
+        "output": {
+          "type": "JSON"
+        }
       }
     }
   ],

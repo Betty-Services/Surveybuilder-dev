@@ -1,4 +1,8 @@
 import { fetchOne, createMany, getAllRecords } from "../../helpers/queries.js";
+import {
+  validateArray,
+  validateSubmission,
+} from "../../helpers/validations.js";
 
 const CreateSubmissionSections = async ({ submissionToken, log }) => {
   const submission = await fetchOne({
@@ -6,8 +10,8 @@ const CreateSubmissionSections = async ({ submissionToken, log }) => {
     properties: ["name", "token", "survey{id}"],
     where: { token: { eq: submissionToken } },
   });
-  if (!submission.survey)
-    throw new Error("Submission not found or is not connected to a survey");
+  validateSubmission(submission);
+
   if (log)
     console.log(
       `Creating Sections for Submission ${submission.token} based on Survey ID ${submission.survey.id}`
@@ -29,6 +33,7 @@ const CreateSubmissionSections = async ({ submissionToken, log }) => {
       }
     `;
   const sections = await getAllRecords(sectionQuery, 0, 200, []);
+  validateArray(sections, "Sections", log, "Create Sections");
   if (log) console.log("Sections", sections);
 
   const sectionsToCreate = sections.map((s) => ({

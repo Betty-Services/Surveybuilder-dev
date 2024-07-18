@@ -4,21 +4,23 @@ import {
   getAllRecords,
   upsertMany,
 } from "../../helpers/queries.js";
+import {
+  validateSubmission,
+  validateArray,
+} from "../../helpers/validations.js";
 
 const CreateSubmissionQuestions = async ({
   submissionToken,
   sections,
   log,
 }) => {
-  console.log("sections", sections);
-  //   if (!sections || !sections[0] || !sections[0].createdSectionId) {
-  //     throw new Error("Couldn't find created section.");
-  //   }
   const submission = await fetchOne({
     modelName: "Submission",
     properties: ["token", "survey{id}"],
     where: { token: { eq: submissionToken } },
   });
+  validateSubmission(submission);
+  validateArray(sections, "Sections", log, "Create Questions");
 
   if (log) {
     console.log(
@@ -47,9 +49,10 @@ const CreateSubmissionQuestions = async ({
         }
       }
     `;
-  console.log("QuestionQuery", questionQuery);
+
   const questions = await getAllRecords(questionQuery, 0, 200, []);
-  console.log("Questions", questions);
+  validateArray(questions, "Questions", log, "Create Questions");
+
   const questionsToCreate = questions.map((q) => ({
     explanation: q.explanation,
     index: q.index,
@@ -77,30 +80,33 @@ const CreateSubmissionQuestions = async ({
   });
 
   const checkboxQuestions = questions.filter((q) => q.questionType.id === 3);
-  if (log) console.log("checkboxQuestions", checkboxQuestions);
-  const answersToCreate = Array.from(
-    { length: checkboxQuestions.length },
-    () => ({})
-  );
-  // Array of empty objects, as many as there are checkbox questions
-  // Checkbox questions have to already have a answer precreated otherwise the pages break - they don't have anything assigned so this is an empty array of as many objects as there are checkbox questions
-  // After being created empty, they have to be linked to the checkboxQuestions (1:1 relation) from the checkboxQuestions as you can't assign a HasMany.
-  const createdAnswers = await createMany({
-    modelName: "Answer",
-    input: answersToCreate,
-  });
-  const questionsToUpdate = [];
-  checkboxQuestions.forEach((q, idx) => {
-    questionsToUpdate.push({
-      id: q.createdQuestionId,
-      answer: { id: createdAnswers.createManyAnswer[idx].id },
+  const checkboxQuestionCount = validateArray(checkboxQuestions);
+  if (checkboxQuestionCount > 0) {
+    if (log) console.log("checkboxQuestions", checkboxQuestions);
+    const answersToCreate = Array.from(
+      { length: checkboxQuestions.length },
+      () => ({})
+    );
+    // Array of empty objects, as many as there are checkbox questions
+    // Checkbox questions have to already have a answer precreated otherwise the pages break - they don't have anything assigned so this is an empty array of as many objects as there are checkbox questions
+    // After being created empty, they have to be linked to the checkboxQuestions (1:1 relation) from the checkboxQuestions as you can't assign a HasMany.
+    const createdAnswers = await createMany({
+      modelName: "Answer",
+      input: answersToCreate,
     });
-  });
-  await upsertMany({
-    modelName: "Question",
-    input: questionsToUpdate,
-  });
-  if (log) console.debug("Updated CheckboxQuestions", createdAnswers);
+    const questionsToUpdate = [];
+    checkboxQuestions.forEach((q, idx) => {
+      questionsToUpdate.push({
+        id: q.createdQuestionId,
+        answer: { id: createdAnswers.createManyAnswer[idx].id },
+      });
+    });
+    await upsertMany({
+      modelName: "Question",
+      input: questionsToUpdate,
+    });
+    if (log) console.log("Updated CheckboxQuestions", createdAnswers);
+  }
 
   return { result: questions };
 };
