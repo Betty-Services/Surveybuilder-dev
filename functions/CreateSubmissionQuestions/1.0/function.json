@@ -1,0 +1,55 @@
+{
+  "description": "Description",
+  "label": "Create Submission Questions",
+  "category": "Survey Builder",
+  "icon": {
+    "name": "PlusCircle",
+    "color": "Orange"
+  },
+  "options": [
+    {
+      "name": "submissionToken",
+      "label": "Submission token",
+      "info": "The Submission token for which you want to create the sections",
+      "meta": {
+        "type": "Value",
+        "allowedKinds": ["STRING"],
+        "validations": {
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "sections",
+      "label": "Sections",
+      "info": "The sections created in the previous step",
+      "meta": {
+        "type": "JSON",
+        "validations": {
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "log",
+      "label": "Log this action",
+      "info": "The log of the creation of the submission in the application logs",
+      "meta": {
+        "type": "Boolean"
+      }
+    },
+    {
+      "name": "result",
+      "label": "Result",
+      "info": "Pass this variable that this creates onto the next step",
+      "meta": {
+        "type": "Output",
+        "output": {
+          "type": "JSON"
+        },
+        "validations": { "required": true }
+      }
+    }
+  ],
+  "yields": "NONE"
+}

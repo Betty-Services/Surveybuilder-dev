@@ -1,0 +1,54 @@
+{
+  "description": "Description",
+  "label": "Create Submission Interactions",
+  "category": "Survey Builder",
+  "icon": {
+    "name": "PlusCircle",
+    "color": "Orange"
+  },
+  "options": [
+    {
+      "name": "submissionToken",
+      "label": "Submission token",
+      "info": "The Submission token for which you want to create the sections",
+      "meta": {
+        "type": "Value",
+        "allowedKinds": ["STRING"],
+        "validations": {
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "answeroptions",
+      "label": "Answer Options",
+      "info": "The Answer Options created in the previous step",
+      "meta": {
+        "type": "JSON",
+        "validations": {
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "questions",
+      "label": "Questions",
+      "info": "The Questions created in the previous step",
+      "meta": {
+        "type": "JSON",
+        "validations": {
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "log",
+      "label": "Log this action",
+      "info": "The log of the creation of the submission in the application logs",
+      "meta": {
+        "type": "Boolean"
+      }
+    }
+  ],
+  "yields": "NONE"
+}

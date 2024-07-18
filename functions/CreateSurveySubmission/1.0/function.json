@@ -1,0 +1,43 @@
+{
+  "description": "Description",
+  "label": "Create Survey Submission",
+  "category": "Misc",
+  "icon": {
+    "name": "ActionsIcon",
+    "color": "Orange"
+  },
+  "options": [
+    {
+      "name": "submissionToken",
+      "label": "Submission Token",
+      "info": "The token of the submission that you want to populate",
+      "meta": {
+        "type": "Value",
+        "allowedKinds": ["STRING"],
+        "validations": {
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "log",
+      "label": "Log",
+      "info": "The log of the creation of the submission in the application logs",
+      "meta": {
+        "type": "Boolean"
+      }
+    },
+    {
+      "meta": {
+        "type": "Output",
+        "output": {
+          "type": "Text"
+        }
+      },
+      "name": "as",
+      "label": "Submission ID as",
+      "info": "The name of the var that will hold the submission ID"
+    }
+  ],
+  "yields": "NONE"
+}
