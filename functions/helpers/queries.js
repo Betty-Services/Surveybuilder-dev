@@ -1,29 +1,3 @@
-export const fetchAll = async ({ modelName, properties, where }) => {
-  const queryName = `all${modelName}`;
-  const query = `
-      query {
-        ${queryName}(where: $where, skip: 0, take: 200, sort: $sort) {
-          results {
-            id
-            ${properties ? properties.join("\n") : ""}
-          }
-          totalCount
-        }
-      }
-    `;
-  console.log("FetchAllQuery", query, where);
-  const { data, errors } = await graphql(query, where);
-
-  if (errors) {
-    console.error(JSON.stringify(errors));
-    throw new Error(errors);
-  }
-
-  const { [queryName]: records } = data;
-
-  return records;
-};
-
 export const fetchOne = async ({ modelName, properties, where }) => {
   const queryName = `one${modelName}`;
   const query = `
@@ -58,52 +32,6 @@ export const createMany = async ({ modelName, input }) => {
   const { data, errors } = await gql(mutation, {
     input: input,
   });
-
-  if (errors) {
-    throw new Error(errors);
-  }
-
-  return data;
-};
-
-export const updateOne = async ({ modelName, id, input }) => {
-  const queryName = `update${modelName}`;
-  const query = `
-      mutation {
-        ${queryName}(id: $id, input: $input) {
-          id
-        }
-      }
-    `;
-
-  const { data, errors } = await graphql(query, { id, input });
-
-  if (errors) {
-    throw new Error(errors);
-  }
-
-  const { [queryName]: record } = data;
-
-  return record;
-};
-
-export const updateMany = async ({ modelName, input, where }) => {
-  const queryName = `updateMany${modelName}`;
-  const mutation = `
-      mutation {
-        ${queryName}(input: $input, where: $where) {
-          id
-        }
-      }
-    `;
-
-  const { data, errors } = await gql(
-    mutation,
-    {
-      input: input,
-    },
-    { where }
-  );
 
   if (errors) {
     throw new Error(errors);
@@ -154,7 +82,6 @@ export const getAllRecords = async (gqlQuery, skip, take, results) => {
 };
 
 const DEFAULT_RETRY_AMOUNT = 5;
-
 export const graphql = async (query, filters, retry, prevError) => {
   if (retry === undefined) {
     retry = DEFAULT_RETRY_AMOUNT;
@@ -185,3 +112,4 @@ const sleep = (ms) => {
     currentDate = Date.now();
   } while (currentDate - date < ms);
 };
+// Credits to Bob Hansen
