@@ -121,7 +121,7 @@ To facilitate further operations, the function links the newly created answer op
 
 The function returns an object containing the answerOptions array, which includes all processed answer options. This output serves as the basis for subsequent steps in the submission creation workflow.
 
-## Create Submission Interactoins
+## Create Submission Interactions
 
 The CreateSubmissionInteractions function automates the creation of interactions between questions and answer options within a submission in the Survey Builder application. This process involves fetching necessary data, validating inputs, and efficiently creating interactions based on predefined relationships.
 
