@@ -1,5 +1,5 @@
 {
-  "description": "Description",
+  "description": "Adds answer options to questions in a submission derived from a survey.",
   "label": "Create Submission Answer Options",
   "category": "Survey Builder",
   "icon": {

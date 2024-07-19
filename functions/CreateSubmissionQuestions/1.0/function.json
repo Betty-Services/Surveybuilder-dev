@@ -1,5 +1,5 @@
 {
-  "description": "Description",
+  "description": "Generates questions for a submission by utilizing existing survey sections.",
   "label": "Create Submission Questions",
   "category": "Survey Builder",
   "icon": {

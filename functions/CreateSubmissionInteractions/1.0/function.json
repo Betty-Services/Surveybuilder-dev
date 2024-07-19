@@ -1,5 +1,5 @@
 {
-  "description": "Description",
+  "description": "Establishes interactions between questions and answer options for a submission.",
   "label": "Create Submission Interactions",
   "category": "Survey Builder",
   "icon": {

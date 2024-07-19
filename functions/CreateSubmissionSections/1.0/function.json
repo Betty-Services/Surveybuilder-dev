@@ -1,5 +1,5 @@
 {
-  "description": "Description",
+  "description": "Creates sections for a submission based on a survey.",
   "label": "Create Submission Sections",
   "category": "Survey Builder",
   "icon": {

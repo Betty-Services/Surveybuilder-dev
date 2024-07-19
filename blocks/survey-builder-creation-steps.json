@@ -1,0 +1,10 @@
+{
+  "dependencies": [],
+  "functions": [
+    "createSubmissionSections 1.0",
+    "createSubmissionQuestions 1.0",
+    "createSubmissionAnswerOptions 1.0",
+    "createSubmissionInteractions 1.0"
+  ],
+  "includes": ["./functions/helpers/"]
+}
