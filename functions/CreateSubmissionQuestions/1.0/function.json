@@ -40,7 +40,7 @@
     },
     {
       "name": "result",
-      "label": "Result",
+      "label": "Resulting Questions",
       "info": "Pass this variable that this creates onto the next step",
       "meta": {
         "type": "Output",

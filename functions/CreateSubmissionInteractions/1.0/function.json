@@ -51,8 +51,8 @@
     },
     {
       "name": "result",
-      "label": "Result",
-      "info": "",
+      "label": "Resulting Interactions",
+      "info": "You won't need this one but it's available for consistency and potential logging",
       "meta": {
         "type": "Output",
         "output": {

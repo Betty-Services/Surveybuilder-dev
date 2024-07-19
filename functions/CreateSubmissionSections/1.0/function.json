@@ -36,7 +36,7 @@
         "validations": { "required": true }
       },
       "name": "result",
-      "label": "Created Sections",
+      "label": "Resulting Sections",
       "info": "Pass the var that this creates onto the next step"
     }
   ],
