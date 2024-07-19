@@ -250,19 +250,6 @@ const CreateSurveySubmission = async ({ submissionToken }) => {
   console.debug("Created Interactions", createdInteractions);
 
   return { as: createdInteractions };
-
-  //   // creating features
-  //   const createdFeatures = await createMany({
-  //     modelName: "Feature",
-  //     input: [...featureCodestoCreate].map((code) => ({ code: code })),
-  //   });
-  //   // Add newly created features to the allExistingFeatures array without making an extra round trip. the ids are passed back from the createMany in the same order as the passed in array.
-  //   featureCodestoCreate.forEach((fc, idx) => {
-  //     allExistingFeatures.push({
-  //       id: createdFeatures.createManyFeature[idx].id,
-  //       code: fc,
-  //     });
-  //   });
 };
 
 export default CreateSurveySubmission;

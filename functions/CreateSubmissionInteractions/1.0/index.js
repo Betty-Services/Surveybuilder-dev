@@ -44,36 +44,28 @@ const CreateSubmissionInteractions = async ({
     return { result: [] };
   }
 
-  const interactionsToCreate = [];
-  interactions.forEach((i) => {
-    console.log("i", i);
+  const interactionsToCreate = interactions.map((i) => {
     const answerOptionId = answerOptions.find(
       (ao) => ao.id === i.surveyansweroption.id
     ).createdAnsweroptionId;
-    console.log("answerOptionId", answerOptionId);
     const sourceQuestionId = answerOptions.find(
       (ao) => ao.surveyquestion.id === i.surveyansweroption.surveyquestion.id
     ).createdQuestionId;
-    console.log("sourceQuestionId", sourceQuestionId);
     const targetQuestionId = questions.find(
       (q) => q.id === i.surveyquestion.id
     ).createdQuestionId;
-    console.log("targetQuestionId", targetQuestionId);
 
-    interactionsToCreate.push({
+    return {
       sourceQuestion: {
-        // If this question...
         id: sourceQuestionId,
       },
       answeroption: {
-        // Gets this answer
         id: answerOptionId,
       },
       question: {
-        // This question will show
         id: targetQuestionId,
       },
-    });
+    };
   });
 
   const createdInteractions = await createMany({
